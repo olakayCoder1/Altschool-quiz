@@ -1,25 +1,151 @@
 import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
+// import './App.css';
+import Exam from './Exam';
+import Home from './Home';
+import Nav from './Nav';
+import Progress from './Progress';
+import AskQuestion from './AskQuestion';
+
 
 function App() {
   return (
+    <Router>  
+      <div className=' flex'>
+        <Nav />
+        <Routes>
+          <Route  path='/home' element={<Home />} />
+          <Route  path='/test' element={<Exam />} />
+          <Route path='/question' element={<AskQuestion />} />
+          <Route path='/progress' element={<Progress />} />
+          <Route path='/users/:id' element={<Apps />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+
+
+
+
+ function Apps() {
+  const [tripType, setTripType] = useState({});
+
+  function handleAnswer(arg){
+    console.log(arg)
+    setTripType("oneWay");
+  }
+
+  console.log(tripType)
+  return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Radio Button Demo.</h1>
+      <div>
+        <div onClick={() => { 
+          setTripType( prev => {
+            return ( {
+              ...prev,
+              'question1':'oneWay'
+            }       
+            )          
+          })
+        }} >
+          <input  type="radio"  value={tripType['question1']}  name="tripType" checked={tripType['question1'] == "oneWay"} />
+          One-way
+        </div>
+        <div  onClick={() =>  { 
+          setTripType( prev => {
+            return ( {
+              ...prev,
+              'question1':'roundTrip'
+            }
+              
+            )
+            
+          })
+        }}  >
+          <input  type="radio" value={tripType['question1']}  name="tripType2"  checked={tripType['question1'] == "roundTrip"} />
+          Round-Trip
+        </div>
+        <div onClick={() =>  { 
+          setTripType( prev => {
+            return ( {
+              ...prev,
+              'question1':'multiCity'
+            }
+              
+            )
+            
+          })
+        }} >
+          <input type="radio" value={tripType['question1']} name="tripType" checked={tripType['question1'] == "multiCity"}/>
+          Multi-City
+        </div>
+      </div>
+
+
+
+
+      <div>
+        <div onClick={() => { 
+          setTripType( prev => {
+            return ( {
+              ...prev,
+              'question2':'oneWay'
+            }       
+            )          
+          })
+        }} >
+          <input  type="radio"  value={tripType['question2']}  name="tripType2" checked={tripType['question2'] == "oneWay"} />
+          One-way
+        </div>
+        <div  onClick={() =>  { 
+          setTripType( prev => {
+            return ( {
+              ...prev,
+              'question2':'roundTrip'
+            }
+              
+            )
+            
+          })
+        }}  >
+          <input  type="radio" value={tripType['question2']}  name="tripType2"  checked={tripType['question2'] == "roundTrip"} />
+          Round-Trip
+        </div>
+        <div onClick={() =>  { 
+          setTripType( prev => {
+            return ( {
+              ...prev,
+              'question2':'multiCity'
+            }
+              
+            )
+            
+          })
+        }} >
+          <input type="radio" value={tripType['question2']} name="tripType2" checked={tripType['question2'] == "multiCity"}/>
+          Multi-City
+        </div>
+      </div>
     </div>
   );
 }
 
+
 export default App;
+
+
+
+// <div  onClick={() => { setTripType("roundTrip");   }}  >
+//           <input  type="radio" value={tripType}  name="tripType"  checked={tripType == "roundTrip"} />
+//           Round-Trip
+//         </div>
