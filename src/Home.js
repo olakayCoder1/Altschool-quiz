@@ -1,23 +1,20 @@
-import backimage from './coding2.jpg'
+import home from './alt-image.PNG'
 
-export default function Home(){
+export default function Home() {
     return (
-        <div className='pt-16 mx-auto w-9/12'>
-            <form className=' flex flex-row justify-evenly px-16 bg-gray-300 p-6'>
-                <select className=' border-2 border-gray-800 px-10 py-3 rounded-lg text-lg bg-gray-500 text-white font-medium hover:bg-gray-700 hover:text-white cursor-pointer      '>
-                    <option value="random">RANDOM</option>
-                    <option value="one">WEEK ONE</option>
-                    <option value="two">WEEK TWO</option>
-                    <option value="three">WEEK THREE</option>
-                    <option value="four">WEEK FOUR</option>
-                </select>
-                <select className=' border-2 border-gray-800 px-10 py-3 rounded-lg text-lg bg-gray-500 text-white font-medium hover:bg-gray-700 hover:text-white cursor-pointer'>
-                    <option value={20}>20 QUESTIONS</option>
-                    <option value={50}>50 QUESTIONS</option>
-                    <option value={100}>100 QUESTIONS</option>
-                </select>
-                <input type="submit" value="START QUIZ" className=' border-2 border-green-600 bg-green-600 px-10 py-3 rounded-lg text-lg font-medium text-white cursor-pointer hover:bg-green-700' />
-            </form>
+        <div className='w-full md:w-9/12 h-full md:p-10' >
+            <img src={home} alt="SVG"  className=' w-full h-96' />
+            {/* <img src="	https://vestertech.github.io/AltSchool1/undraw_proud_coder_re_exuy.svg" alt="SVG"></img> */}
+            <div className=' text-xl font-light text-gray-600 p-4 md:text-xl'>
+                <h1 className='text-xl md:text-2xl'>WELCOME to Altschool Practice Quiz</h1>
+                <p>The questions on this website are base on the study guide provided by <strong><i>Altschool Diploma School</i></strong>.</p>
+                <p> You will be presented Multiple Choice Questions, where you will be given four options. 
+                     You will select the best suitable answer for the question and then proceed to the next question without wasting given time.
+                     You will get your online test score after finishing the complete test via the email you provided.
+                </p>
+                <p>If there is error in any of the questions, kindly reach out to me by visiting <strong><span className=' text-gray-900'>"Find Error ?"</span></strong></p>
+
+            </div>
         </div>
     )
 }
