@@ -3,6 +3,7 @@ import logo from './logo.svg'
 import profile from './image-default.png'
 import questions from './Fetch'
 import Question from './Question'
+import AuthContextProvider from './context.js/Authenticate'
 
 
 
@@ -24,7 +25,7 @@ export default function Exam(){
             }
             )} )
     }
-    console.log(Answers)
+    // console.log(Answers)
     // QUESTIONS LIST
     const quizs = questions.map( (quiz, index ) => {
         return <Question key={quiz['description']} question_id={quiz['id']} question={quiz['description']} options={quiz['options']} handleAnswer={handleAnswer} answers={Answers} number={index + 1}/>
@@ -41,8 +42,10 @@ export default function Exam(){
         }    
     }
 
+    
     return (
         <div className=" flex flex-col-reverse md:flex-row md:w-9/12">
+          
             <div className="w-screen md:w-9/12  md:border-r-2 md:border-l-2">
                 <div>
                     <h3 className=" px-6 py-6 text-gray-700"><span className='text-base md:text-xl text-red-600'>INSTRUCRION :  </span>Quiz instruction goes here (which implies rel="noopener") is a security risk in older browsers (which implies rel="noopener") is a security risk in older browsers</h3>
@@ -64,6 +67,7 @@ export default function Exam(){
                     </div>
                 </div>
             </div>
+           
         </div>
     )
 }

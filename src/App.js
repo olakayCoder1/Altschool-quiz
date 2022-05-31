@@ -1,12 +1,6 @@
 import logo from './logo.svg';
 import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Routes,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Routes, Route, Link, Navigate} from "react-router-dom";
 // import './App.css';
 import Exam from './Exam';
 import Quiz from './Quiz';
@@ -15,25 +9,45 @@ import Progress from './Progress';
 import AskQuestion from './AskQuestion';
 import Home from './Home';
 import Error from './Error';
+import Register from './Register';
+import LoginPage from './Login';
+import AuthContextProvider from './context.js/Authenticate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
+
+const ProtectedRoute = ({ user, children }) => {
+  if (!user) {
+    return <Navigate to="/account/login" replace />;
+  }
+
+  return children;
+};
+
 function App() {
+
+  
   return (
+    <AuthContextProvider>
     <Router>  
       <div className=' flex'>
-        <Nav />
-        <Routes>
-          <Route  path='/quiz' element={<Quiz />} />
-          <Route  path='/test' element={<Exam />} />
-          <Route path='/question' element={<AskQuestion />} />
-          <Route path='/progress' element={<Progress />} />
-          <Route path='/error' element={<Error />} />
-          <Route path='/users/:id' element={<Apps />} />
-          <Route  path='/' element={<Home />} />
-        </Routes>
+          <Nav />
+          <Routes>
+            <Route path='/account/register' element={<Register />} />
+            <Route path='/account/login' element={<LoginPage />} />
+            {/* <Route  path="/quiz" element={
+            // <ProtectedRoute user={user}> <Quiz /> </ProtectedRoute> }  /> */}
+            <Route  path='/quiz' element={<Quiz />} />
+            <Route  path='/test' element={<Exam />} />
+            <Route path='/question' element={<AskQuestion />} />
+            <Route path='/progress' element={<Progress />} />
+            <Route path='/error' element={<Error />} />
+            <Route path='/users/:id' element={<Apps />} />
+            <Route  path='/' element={<Home />} />
+          </Routes>    
       </div>
     </Router>
+    </AuthContextProvider>
   );
 }
 

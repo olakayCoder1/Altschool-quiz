@@ -1,6 +1,14 @@
+import { useContext } from 'react'
 import home from './alt-image.PNG'
+import { AuthContext } from './context.js/Authenticate'
+
 
 export default function Home() {
+
+    const {authUser} = useContext(AuthContext);
+
+
+    
     return (
         <div className='w-full md:w-9/12 h-full md:p-10' >
             <img src={home} alt="SVG"  className=' w-full h-96' />
