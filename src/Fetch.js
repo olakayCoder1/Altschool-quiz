@@ -32,7 +32,7 @@ export default  [
             "name": "Month two",
             "question": [
                 "The process of finding errors and fixing them in a source code is called:",
-                "A loop that never ends is referred to as a(n):"
+
             ]
         },
         "description": "The process of finding errors and fixing them in a source code is called:",
@@ -48,7 +48,6 @@ export default  [
         "category": {
             "name": "Month two",
             "question": [
-                "The process of finding errors and fixing them in a source code is called:",
                 "A loop that never ends is referred to as a(n):"
             ]
         },

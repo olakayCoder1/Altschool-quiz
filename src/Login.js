@@ -1,6 +1,6 @@
 import { useContext } from "react"
-import AuthContextProvider from "./context.js/Authenticate"
-import {AuthContext} from "./context.js/Authenticate"
+import AuthContextProvider from "./context/Authenticate"
+import {AuthContext} from "./context/Authenticate"
 
 
 
@@ -21,13 +21,19 @@ export default function LoginPage(){
     //         }
     //     })
     // }
-    const {user, loginUser }  = useContext(AuthContext)
+    const {user, loginUser , open , setOpen}  = useContext(AuthContext)
 
     return (
        
-
-        <form className="md:w-4/12 md:mx-auto py-20" onSubmit={loginUser}>
-                <div>
+        <div className=" w-full ">
+            <div className = "flex justify-between h-14 p-3 md:hidden lg:hidden border-box border-b-2 bg-white sticky top-0 " >
+                <div className='flex gap-6'>
+                {open ? <span onClick={()=> setOpen(!open)}><i class="fa-solid fa-xmark"></i></span> : <span onClick={()=> setOpen(!open)}><i class="fa-solid fa-bars"></i></span>} <h2 className=' md:hidden lg:inline-block'>Altschool Quiz </h2>
+                </div>
+                <p className=' text-red-600 md:font-bold md:text-2xl lg:font-bold lg:text-2xl'>Sign In</p>
+            </ div >
+            <form className=" w-full md:w-7/12 md:mx-auto py-20 px-4" onSubmit={loginUser}>
+                <div className="">
                     <label htmlFor="username" class="block mb-2 text-sm font-medium text-gray-700">username </label>
                     <input type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 outline-none text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"  required />
                 </div>
@@ -43,6 +49,9 @@ export default function LoginPage(){
 
                 </div>
         </form>
+        </div>
+
+       
     
     )
 }

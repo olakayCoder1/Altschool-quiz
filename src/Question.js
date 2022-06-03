@@ -21,6 +21,7 @@ export default function Question(props){
     return (
 
         <div>
+            
             <div className=" py-4 text-gray-600">
                     <p className='font-medium text-base md:font-normal md:text-lg'>
                        <span className=' text-xl font-semibold'>{props.number}</span> . {props.question}

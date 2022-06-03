@@ -12,6 +12,9 @@ export const AuthContext = createContext();
 
 export default function AuthContextProvider({children}){
 
+    // NAV TOGGLING CONTEXT
+    const [ open , setOpen] = useState(false)
+    console.log(open)
     const [authToken , setAuthToken ] = useState(()=> JSON.parse(localStorage.getItem('authToken'))|| null)
     const [ authUser , setAuthUser ] = useState(()=> JSON.parse(localStorage.getItem('authUser'))|| null);
 
@@ -74,7 +77,7 @@ export default function AuthContextProvider({children}){
     }
 
 
-    const value  = { authUser ,  loginUser , registerUser ,logoutUser  }
+    const value  = { authUser ,  loginUser , registerUser ,logoutUser , setOpen , open  }
 
     
     return (
@@ -83,3 +86,14 @@ export default function AuthContextProvider({children}){
         </AuthContext.Provider>
     )
 }
+
+
+
+
+
+
+
+
+
+
+export const showNavContext = createContext

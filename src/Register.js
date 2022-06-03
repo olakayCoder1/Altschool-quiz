@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import { AuthContext } from "./context.js/Authenticate"
+import { AuthContext } from "./context/Authenticate"
 
 
 
@@ -8,7 +8,7 @@ import { AuthContext } from "./context.js/Authenticate"
 
 export default function Register(){
 
-    const {registerUser}  = useContext(AuthContext);
+    const {registerUser, open , setOpen}  = useContext(AuthContext);
     const [ userDetails , setUserDetails] = useState({})
 
     function handleChange(){
@@ -17,9 +17,15 @@ export default function Register(){
 
 
     return (
-        <form className="md:w-6/12 md:mx-auto py-20" onSubmit={registerUser}>
-           
-            <div class="grid gap-6 mb-6  lg:grid-cols-2">
+        <div className=" w-full">
+            <div className = "flex justify-between h-14 p-3 md:hidden lg:hidden border-box border-b-2 bg-white sticky top-0 " >
+                <div className='flex gap-6'>
+                {open ? <span onClick={()=> setOpen(!open)}><i class="fa-solid fa-xmark"></i></span> : <span onClick={()=> setOpen(!open)}><i class="fa-solid fa-bars"></i></span>} <h2 className=' md:hidden lg:inline-block'>Altschool Quiz </h2>
+                </div>
+                <p className=' text-red-600 md:font-bold md:text-2xl lg:font-bold lg:text-2xl'>Register</p>
+            </ div >
+            <form className=" w-full md:w-6/12 md:mx-auto py-10 px-4" onSubmit={registerUser}>
+            <div class="grid gap-6 mb-4  lg:grid-cols-2">
                 <div>
                     <label htmlFor="full_name" class="block mb-2 text-sm font-medium text-gray-700 ">Full name</label>
                     <input type="text" id="full_name" name="full_name" class="bg-gray-50 border border-gray-300 outline-none text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"  required/>
@@ -29,7 +35,7 @@ export default function Register(){
                     <input type="text" id="username" name="username" class="bg-gray-50 border border-gray-300 outline-none text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"  required />
                 </div>
             </div>
-            <div class="grid gap-6 mb-6  lg:grid-cols-2">
+            <div class="grid gap-6 mb-4  lg:grid-cols-2">
                 <div class="mb-6">
                     <label htmlFor="email" class="block mb-2 text-sm font-medium text-gray-700">Email address</label>
                     <input type="email" id="email" name="email" class="bg-gray-50 border border-gray-300 outline-none text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"  required/>
@@ -44,17 +50,17 @@ export default function Register(){
                     </select>
                 </div>
             </div>
-            <div class="grid gap-6 mb-6  lg:grid-cols-2"> 
-                <div class="mb-6">
+            <div class="grid gap-6 mb-4  lg:grid-cols-2"> 
+                <div class="mb-4">
                     <label htmlFor="password" class="block mb-2 text-sm font-medium text-gray-700 ">Password</label>
                     <input type="password" id="password" name="password" class="bg-gray-50 border border-gray-300 outline-none text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required/>
                 </div> 
-                <div class="mb-6">
+                <div class="mb-4">
                     <label htmlFor="confirm_password" class="block mb-2 text-sm font-medium text-gray-900">Confirm password</label>
                     <input type="password" id="confirm_password" name="confirm_password" class="bg-gray-50 border border-gray-300 outline-none text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required/>
                 </div>
             </div> 
-            <div class="flex items-start mb-6">
+            <div class="flex items-start mb-4">
                 <div class="flex items-center h-5">
                 <input id="remember" type="checkbox" value="" class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required/>
                 </div>
@@ -63,5 +69,7 @@ export default function Register(){
             <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Sign Up</button>
             <p className="mt-2 text-sm font-medium">Already have an account ? <a href="/account/login" class="text-blue-600 hover:underline">Sign In</a></p>
         </form>
+        </div>
+        
     )
 }

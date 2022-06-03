@@ -11,8 +11,18 @@ import Home from './Home';
 import Error from './Error';
 import Register from './Register';
 import LoginPage from './Login';
-import AuthContextProvider from './context.js/Authenticate';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import AuthContextProvider from './context/Authenticate';
+import Admin from './admin/Admin';
+import CreateQuestion from './admin/CreateQuestion';
+import UserList from './admin/UserList';
+import QuizCategory from './admin/QuizCategory';
+import NavBar from './NavBar';
+
+
+
+
+
+
 
 
 
@@ -30,24 +40,29 @@ function App() {
   return (
     <AuthContextProvider>
     <Router>  
-      <div className=' flex'>
+      <div className=' flex relative'>
           <Nav />
           <Routes>
             <Route path='/account/register' element={<Register />} />
             <Route path='/account/login' element={<LoginPage />} />
-            {/* <Route  path="/quiz" element={
-            // <ProtectedRoute user={user}> <Quiz /> </ProtectedRoute> }  /> */}
-            <Route  path='/quiz' element={<Quiz />} />
-            <Route  path='/test' element={<Exam />} />
-            <Route path='/question' element={<AskQuestion />} />
-            <Route path='/progress' element={<Progress />} />
-            <Route path='/error' element={<Error />} />
-            <Route path='/users/:id' element={<Apps />} />
-            <Route  path='/' element={<Home />} />
-          </Routes>    
-      </div>
-    </Router>
-    </AuthContextProvider>
+             <Route  path='/quiz' element={<Quiz />} />
+             <Route  path='/quiz/random' element={<Exam />} />
+             <Route path='/question' element={<AskQuestion />} />
+             <Route path='/progress' element={<Progress />} />
+             <Route path='/error' element={<Error />} />
+             <Route path='/admin' element={<Admin />} />
+             <Route path='/admin/questions/create' element={<CreateQuestion />} />
+             <Route path='/admin/users' element={<UserList />} />
+             <Route path='/admin/category' element={<QuizCategory />} />
+             <Route path='/users/:id' element={<Apps />} />
+             <Route  path='/' element={<Home />} />
+           </Routes>    
+           {/* <NavBar /> */}
+           
+       </div>
+     </Router>
+   </AuthContextProvider>
+  
   );
 }
 
