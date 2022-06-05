@@ -7,25 +7,6 @@ export default function Home() {
 
     const {authUser} = useContext(AuthContext);
 
-
-    useEffect(()=>{
-        fetch('http://127.0.0.1:8000/api/result/', {
-        method: 'POST',
-        headers : {
-            'content-type' : 'application/json'
-        },
-        body : JSON.stringify( {
-            1: "Hyper Test Makeup Language",
-            2: "It is used as gateway to the brower",
-            3: "Debugging",
-            5: "Infinite loop",
-        })})
-        .then(res => res.json())
-        .then(data => console.log(data))
-     
-    },[])
-    
-
     const {open,setOpen} = useContext(AuthContext)
     
     return (
@@ -35,7 +16,7 @@ export default function Home() {
             </ div >
             <img src={home} alt="SVG"  className=' w-full h-96' />
             {/* <img src="	https://vestertech.github.io/AltSchool1/undraw_proud_coder_re_exuy.svg" alt="SVG"></img> */}
-            <div className=' text-xl font-light text-gray-600 p-4 md:text-xl'>
+            <div className=' text-base font-light text-gray-600 p-4 md:text-xl'>
                 <h1 className='text-sm font-medium md:text-xl'>WELCOME to Altschool Practice Quiz</h1>
                 <p>The questions on this website are base on the study guide provided by <strong><i>Altschool Diploma School</i></strong>.</p>
                 <p> You will be presented Multiple Choice Questions, where you will be given four options. 

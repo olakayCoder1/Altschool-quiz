@@ -14,7 +14,7 @@ export default function AskQuestion(){
              {open ? <span onClick={()=> setOpen(!open)}><i class="fa-solid fa-xmark"></i></span> : <span onClick={()=> setOpen(!open)}><i class="fa-solid fa-bars"></i></span>} <h2 className=' md:hidden lg:inline-block'>Altschool Quiz </h2>
             </ div >
             <div className="hidden md:block h-14 p-3 text-lg font-medium border-box border-b-2 bg-white sticky top-0 shadow-md">
-                    <h2 className=" float-left mx-12">ASK QUESTION</h2>
+                    <h2 className=" float-right mx-12">ASK QUESTION</h2>
             </div>
             <div>
                 <h3 className=" px-6 py-6 text-gray-700">Headings must have content and the content must be accessible by a screen reader</h3>

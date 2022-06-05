@@ -17,7 +17,7 @@ export default function AdminTop(props) {
                 </div>
                 <p className=' text-red-600 md:font-bold md:text-2xl lg:font-bold lg:text-2xl'>Register</p>
             </ div >
-      <div className=" flex flex-col me:flex gap-4 mt-12 px-2">
+      <div className=" flex flex-col md:flex-row items-center gap-4 mt-12 px-2">
         
         <div class="py-4 pl-4 h-32 w-full md:w-2/6 max-w-sm bg-gray-300 rounded-xl border border-gray-300 shadow-md  hover:bg-gray-400">
           <h5 class="mb-2 text-3xl font-extrabold tracking-tight text-gray-600">2021 Questions</h5>

@@ -59,7 +59,7 @@ export default function AuthContextProvider({children}){
                  window.location['href'] = 'http://localhost:3000/';      
             }
         })
-        .catch(error => window.location['href'] = 'http://localhost:3000/error')    
+        // .catch(error => window.location['href'] = 'http://localhost:3000/error')    
     } 
     
     
@@ -67,7 +67,6 @@ export default function AuthContextProvider({children}){
     
         let ask = window.confirm('Are you sure you want to logout?');  
         if (ask){
-            alert('It is not goodbye but see you later')
             localStorage.removeItem('authUser');
             localStorage.removeItem('authToken');
             window.location['href'] = 'http://localhost:3000/'
@@ -77,7 +76,7 @@ export default function AuthContextProvider({children}){
     }
 
 
-    const value  = { authUser ,  loginUser , registerUser ,logoutUser , setOpen , open  }
+    const value  = { authUser , authToken , loginUser , registerUser ,logoutUser , setOpen , open  }
 
     
     return (

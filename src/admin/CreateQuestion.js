@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../context/Authenticate'
+import jwt_decode from "jwt-decode";
 
 function CreateQuestion() {
-    const {authUser, open , setOpen} = useContext(AuthContext)
+    const {authUser,authToken, open , setOpen} = useContext(AuthContext)
     const [ question , setQuestion] = useState({"description": '', "option-a": "", "option-b": "", "option-c": "", "option-d": "", "answer": ""});
     useEffect(()=>{
         console.log('me')
@@ -56,30 +57,33 @@ function CreateQuestion() {
             "answer": question[question['answer']],
             "category": cate
         }
-        // console.log(questionData)
+        console.log(authToken.access)
+        console.log(jwt_decode(authToken.access))
+
         await fetch('http://127.0.0.1:8000/api/questions/create/', {
             method: 'POST',
             headers : {
-                'content-type' : 'application/json',
-
+                'Content-Type' : 'application/json',
+                'Authorization': 'Bearer '+ String(authToken.access)
             },
             body : JSON.stringify(questionData)
             
         })
         .then( res => res.json())
         .then(data => {
-                console.log(data.access);
+                console.log(data);
         })
-        // console.log(questionData)
+        // console.log(questionData) 
     }
+    
 
   return (
-    <div className=" md:w-10/12">
+    <div className="w-full md:w-10/12">
         <div className = "flex justify-between h-14 p-3 md:hidden lg:hidden border-box border-b-2 bg-white sticky top-0 " >
                 <div className='flex gap-6'>
                 {open ? <span onClick={()=> setOpen(!open)}><i class="fa-solid fa-xmark"></i></span> : <span onClick={()=> setOpen(!open)}><i class="fa-solid fa-bars"></i></span>} <h2 className=' md:hidden lg:inline-block'>Altschool Quiz </h2>
                 </div>
-                <p className=' text-red-600 md:font-bold md:text-2xl lg:font-bold lg:text-2xl'>Register</p>
+                <p className=' text-red-600 md:font-bold md:text-2xl lg:font-bold lg:text-2xl'>Create New Question</p>
             </ div >
             <div className="hidden md:flex justify-between h-14 py-3 px-6 text-lg font-medium border-box border-b-2 bg-white sticky top-0 shadow-md">
                     <h2 className="">ADMIN | CREATE QUESTIONS</h2>

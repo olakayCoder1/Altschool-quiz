@@ -5,7 +5,7 @@ import { AuthContext } from '../context/Authenticate'
 export default function QuizCategory() {
     const {authUser, open , setOpen} = useContext(AuthContext)
   return (
-    <div className="w-full md:w-10/12">
+    <div className="w-full md:w-full">
         <div className = "flex justify-between h-14 p-3 md:hidden lg:hidden border-box border-b-2 bg-white sticky top-0 " >
                 <div className='flex gap-6'>
                 {open ? <span onClick={()=> setOpen(!open)}><i class="fa-solid fa-xmark"></i></span> : <span onClick={()=> setOpen(!open)}><i class="fa-solid fa-bars"></i></span>} <h2 className=' md:hidden lg:inline-block'>Altschool Quiz </h2>

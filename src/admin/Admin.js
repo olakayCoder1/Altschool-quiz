@@ -10,7 +10,7 @@ export default function Admin(){
     const {authUser} = useContext(AuthContext)
 
     return (
-        <div className="w-full  md:w-10/12">
+        <div className="w-full md:full lg:w-10/12">
             {/* <Router>   */}
                     <Routes>
                         <Route path='/admin/questions/create' element={<CreateQuestion />} />

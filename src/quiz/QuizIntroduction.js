@@ -1,17 +1,16 @@
 import React, { useContext } from 'react'
-import logo from './logo.svg'
-import questions from './Fetch'
-import Question from './Question'
-import AuthContextProvider, { AuthContext } from './context/Authenticate'
+import questions from '../Fetch'
+import { AuthContext } from '../context/Authenticate';
+import Question from '../Question';
 
+export default function QuizIntroduction() {
 
-
-export default function Exam(){
-
-    const {authUser,open,setOpen, authToken} = useContext(AuthContext)
+    const {authUser,open,setOpen} = useContext(AuthContext)
     let me = new Date()
     const [ time , setTime ] = React.useState(me.getDate())
     const [Answers, setAnswers] = React.useState(() =>  JSON.parse(localStorage.getItem('answers')) || [] );
+
+
     // RETRIEVE ITEM FROM LOCALSTORAGE IF EXIST
     React.useEffect(()=>{
         localStorage.setItem('answers', JSON.stringify(Answers))
@@ -38,25 +37,12 @@ export default function Exam(){
     function submitQuiz(){
         const ask = window.confirm('Are you sure you want to submit ?')
         if(ask){
-        fetch('http://127.0.0.1:8000/api/result/', {
-        method: 'POST',
-        headers : {
-            'Content-Type' : 'application/json',
-            'Authorization': 'Bearer '+ String(authToken.access)
-        },
-        body : JSON.stringify(Answers)})
-        .then(res => res.json())
-        .then(data => console.log(data))
-     
-    }
             localStorage.removeItem('answers')
             window.location['href'] = 'http://localhost:3000/'
         }    
-    
-
-    
-    return (
-        <div className=" md:w-10/12">
+    }
+  return (
+    <div className=" md:w-10/12">
             <div className = "flex justify-between h-14 p-3 md:hidden lg:hidden border-box border-b-2 bg-white sticky top-0 " >
              <div className='flex gap-6'>
              {open ? <span onClick={()=> setOpen(!open)}><i class="fa-solid fa-xmark"></i></span> : <span onClick={()=> setOpen(!open)}><i class="fa-solid fa-bars"></i></span>} <h2 className=' md:hidden lg:inline-block'>Altschool Quiz </h2>
@@ -74,6 +60,20 @@ export default function Exam(){
                     </div>
                     <ol className='w-11/12 border-box  mt-2 mx-auto px-6 py-1'>
                         {quizs}
+                        {quizs}
+                        {quizs}
+                        {quizs}
+                        {quizs}
+                        {quizs}
+                        {quizs}
+                        {quizs}
+                        {quizs}
+                        {quizs}
+                        {quizs}
+                        {quizs}
+                        {quizs}
+                        {quizs}
+                       
                     </ol>
                 </div>
                 <div className='hidden md:block  md:w-3/12'>
@@ -91,5 +91,5 @@ export default function Exam(){
                 </div>
            </div>
         </div>
-    )
+  )
 }
