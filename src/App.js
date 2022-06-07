@@ -2,26 +2,21 @@ import logo from './logo.svg';
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Routes, Route, Link, Navigate} from "react-router-dom";
 // import './App.css';
-import Exam from './Exam';
-import Quiz from './Quiz';
-import Nav from './Nav';
-import Progress from './Progress';
-import AskQuestion from './AskQuestion';
-import Home from './Home';
-import Error from './Error';
-import Register from './Register';
-import LoginPage from './Login';
+import Exam from './quiz/Exam';
+import Quiz from './quiz/Quiz';
+import Nav from './layout/Nav';
+import Progress from './component/Progress';
+import AskQuestion from './component/AskQuestion';
+import Home from './component/Home';
+import Error from './component/Error';
+import Register from './userAuth/Register';
+import LoginPage from './userAuth/Login';
 import AuthContextProvider from './context/Authenticate';
 import Admin from './admin/Admin';
 import CreateQuestion from './admin/CreateQuestion';
 import UserList from './admin/UserList';
 import QuizCategory from './admin/QuizCategory';
-import QuizHtml from './quiz/QuizHtml';
-import QuizCss from './quiz/QuizCss';
-import QuizCloud from './quiz/QuizCloud';
-import QuizIntroduction from './quiz/QuizIntroduction';
-import QuizPython from './quiz/QuizPython';
-import QuizJavascript from './quiz/QuizJavascript';
+
 
 
 
@@ -48,13 +43,8 @@ function App() {
             <Route path='/account/register' element={<Register />} />
             <Route path='/account/login' element={<LoginPage />} />
              <Route  path='/quiz' element={<Quiz />} />
-             <Route  path='/quiz/html' element={<QuizHtml />} />
-             <Route  path='/quiz/python' element={<QuizPython />} />
-             <Route  path='/quiz/cloud' element={<QuizCloud />} />
-             <Route  path='/quiz/introduction' element={<QuizIntroduction />} />
-             <Route  path='/quiz/javascript' element={<QuizJavascript />} />
-             <Route  path='/quiz/javascript' element={<QuizCss />} />
-             <Route  path='/quiz/random' element={<Exam />} />
+             {/* <Route  path='/quiz/random' element={<Exam />} /> */}
+             <Route  path='/quiz/:category' element={<Exam />} />
              <Route path='/question' element={<AskQuestion />} />
              <Route path='/progress' element={<Progress />} />
              <Route path='/error' element={<Error />} />
@@ -62,7 +52,7 @@ function App() {
              <Route path='/admin/questions/create' element={<CreateQuestion />} />
              <Route path='/admin/users' element={<UserList />} />
              <Route path='/admin/category' element={<QuizCategory />} />
-             <Route path='/*' element={<Apps />} />
+             {/* <Route path='/*' element={<Apps />} /> */}
              <Route  path='/' element={<Home />} />
            </Routes>    
            {/* <NavBar /> */}

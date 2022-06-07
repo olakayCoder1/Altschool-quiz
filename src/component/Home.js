@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react'
-import home from './alt-image.PNG'
-import { AuthContext } from './context/Authenticate'
+import home from '../alt-image.PNG'
+import { AuthContext } from '../context/Authenticate'
 
 
 export default function Home() {

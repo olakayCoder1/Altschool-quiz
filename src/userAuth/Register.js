@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import { AuthContext } from "./context/Authenticate"
+import { AuthContext } from "../context/Authenticate"
 
 
 

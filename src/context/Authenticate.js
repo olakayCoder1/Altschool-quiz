@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import { createContext , useState } from "react";
 
@@ -7,16 +7,16 @@ import { createContext , useState } from "react";
 
 export const AuthContext = createContext();
 
-
+ 
 
 
 export default function AuthContextProvider({children}){
 
     // NAV TOGGLING CONTEXT
     const [ open , setOpen] = useState(false)
-    console.log(open)
     const [authToken , setAuthToken ] = useState(()=> JSON.parse(localStorage.getItem('authToken'))|| null)
     const [ authUser , setAuthUser ] = useState(()=> JSON.parse(localStorage.getItem('authUser'))|| null);
+    const [ Loading , setLoading ] = useState(true);
 
 
     const registerUser = async (e) => {
@@ -34,7 +34,8 @@ export default function AuthContextProvider({children}){
             .then( res => res.json())
             .then(data => {
                  window.location['href'] = 'http://localhost:3000/account/login';
-                });
+                })
+                .catch(err => console.log(err.status))
             }
         }        
 
@@ -59,25 +60,70 @@ export default function AuthContextProvider({children}){
                  window.location['href'] = 'http://localhost:3000/';      
             }
         })
-        // .catch(error => window.location['href'] = 'http://localhost:3000/error')    
+        .catch(error => console.log(error))    
     } 
     
     
     const logoutUser = () => {
     
-        let ask = window.confirm('Are you sure you want to logout?');  
-        if (ask){
+        // let ask = window.confirm('Are you sure you want to logout?');  
+        // if (ask){
             localStorage.removeItem('authUser');
             localStorage.removeItem('authToken');
             window.location['href'] = 'http://localhost:3000/'
-        }
+        // }
         
 
     }
 
 
-    const value  = { authUser , authToken , loginUser , registerUser ,logoutUser , setOpen , open  }
+   
 
+    // const refreshToken = async () => {
+
+    //     console.log('REFRESHING AUTH USER TOKEN')
+    //     const response = await fetch('http://127.0.0.1:8000/api/token/refresh/', {
+    //         method: 'POST',
+    //         headers : {
+    //             'content-type' : 'application/json',
+    //         },
+    //         body : JSON.stringify({'refresh': authToken?.refresh })
+            
+    //     })
+    //     const data = await response.json()
+    //     if(response.status === 200){
+    //         setAuthToken(data)
+    //         setAuthUser(jwt_decode(data.access))
+    //         localStorage.setItem('authToken', JSON.stringify(data))
+    //     }else{
+    //         logoutUser()
+    //     }
+    //      if(Loading){
+    //         setLoading(false)
+    //      }
+        
+    // }
+
+
+    // useEffect(()=> {
+
+    //     if(Loading){
+    //         refreshToken()
+    //     }
+
+    //     let fourMinutes = 1000 * 60 * 4
+
+    //     let interval =  setInterval(()=> {
+    //         if(authToken){
+    //            refreshToken()
+    //         }
+    //     }, fourMinutes)
+    //     return ()=> clearInterval(interval)
+
+    // }, [authToken, Loading])
+
+    const value  = { authUser , authToken , loginUser , registerUser ,logoutUser , setOpen , open  }
+    console.log(Loading)
     
     return (
         <AuthContext.Provider value={value} >

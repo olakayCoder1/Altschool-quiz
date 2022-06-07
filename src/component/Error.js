@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { AuthContext } from "./context/Authenticate"
+import { AuthContext } from "../context/Authenticate"
 
 
 
@@ -9,7 +9,7 @@ export default function Error(){
     const {user,open,setOpen} = useContext(AuthContext);
     console.log(user)
     return (
-        <div className="w-full md:w-10/12">
+        <div className="w-full md:w-full lg:w-10/12">
              <div className = "flex gap-6 h-14 p-3 md:hidden lg:hidden border-box border-b-2 bg-white sticky top-0 " >
              {open ? <span onClick={()=> setOpen(!open)}><i class="fa-solid fa-xmark"></i></span> : <span onClick={()=> setOpen(!open)}><i class="fa-solid fa-bars"></i></span>} <h2 className=' md:hidden lg:inline-block'>Altschool Quiz </h2>
             </ div >

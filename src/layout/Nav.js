@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import { AuthContext } from "./context/Authenticate"
+import { AuthContext } from "../context/Authenticate"
 
 
 export default function Nav() {
@@ -9,7 +9,7 @@ export default function Nav() {
 
     return (
         <>
-        <div className={`${open ? "md:w-64" : "md:w-20"} hidden duration-500 h-screen md:block md:w-20 lg:block lg:w-72 md:sticky md:top-0`}>
+        <div className={`${open ? "md:w-2/6" : "md:w-20"} hidden duration-500 h-screen md:block lg:block lg:w-72 md:sticky md:top-0`}>
             <nav className = "hidden md:flex md:flex-col md:justify-between md:h-screen  md:bg-gray-700 md:border-r-2 md:sticky md:top-0 w-full" >
                 <div>
                     <div className = "flex h-14 p-3 lg:text-lg lg:font-medium border-box border-b-2 bg-white" >
@@ -162,7 +162,7 @@ export default function Nav() {
                                     <i class = "fas fa-random" > </i>{open && <span className=" pl-4 md:hidden lg:inline-block">Random questions</span >}
                                 </p>
                             </a >}
-                            {authUser &&
+                            {authUser && staff &&
                             <a href = "/admin" className = " active:bg-red-400" > 
                                 <p className = " px-6 py-3 text-sm text-white font-medium hover:bg-white hover:text-gray-700 cursor-pointer" > 
                                 <i class="fa-solid fa-user"></i><i class="fa-solid fa-card-diamond"></i>{open && <span className=" pl-4 md:hidden lg:inline-block">Admin</span >} 

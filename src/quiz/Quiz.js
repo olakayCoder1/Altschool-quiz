@@ -1,6 +1,5 @@
 import { useContext } from 'react'
-import backimage from './coding2.jpg'
-import { AuthContext } from './context/Authenticate'
+import { AuthContext } from '../context/Authenticate'
 import QuizType from './QuizType'
 
 

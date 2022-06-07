@@ -1,9 +1,41 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../context/Authenticate'
+import QuizCategoryItem from './QuizCategoryItem'
 
 
 export default function QuizCategory() {
-    const {authUser, open , setOpen} = useContext(AuthContext)
+    const {authUser, open , setOpen , authToken, logoutUser} = useContext(AuthContext)
+    const [category , setCategory] = React.useState(null)
+
+    React.useLayoutEffect(()=>{
+        if(!authUser['staff']){
+            window.location['href'] = 'http://localhost:3000/';
+        }
+    },[])
+    
+    React.useEffect(()=>{
+        async function fetchUsers(){
+         const response = await fetch('http://127.0.0.1:8000/api/users/', {
+             method : 'GET',
+             headers : {
+                 'Content-Type': 'application/json',
+                 'Authorization' : 'Bearer '+ String(authToken.access)
+             }
+         })
+         const data = await response.json()
+
+         if(response.status === 200){
+             setCategory(data)
+         }else if( response.statusText === 'Unauthorized'){
+             logoutUser()
+         }
+
+        }
+       
+        fetchUsers()
+     },[])
+
+
   return (
     <div className="w-full md:w-full">
         <div className = "flex justify-between h-14 p-3 md:hidden lg:hidden border-box border-b-2 bg-white sticky top-0 " >
@@ -24,588 +56,24 @@ export default function QuizCategory() {
                     <thead className="text-xs text-gray-700 uppercase bg-gray-300 ">
                         <tr>
                             <th scope="col" className="px-6 py-3">
-                                Username
+                                Name 
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Quiz category
+                                Total question
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Date
+                                Date Created
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Review
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                Score
+                                Delete
                             </th>                       
                         </tr>
                     </thead>
                     <tbody>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Olatunji 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Week three questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Fair
-                            </td>
-                            <td className="px-6 py-4">
-                                99%
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Abdul Mujeeb
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap hover:bg-gray-600 hover:text-white">
-                                Random  questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Excellent
-                            </td>
-                            <td className="px-6 py-4">
-                                89%
-                            </td>
-                        </tr>
-                        <tr className="bg-white  hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Badmus 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap hover:bg-gray-600 hover:text-white">
-                                Random questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Good
-                            </td>
-                            <td className="px-6 py-4">
-                                79%
-                            </td>
-                            
-                        </tr>
-                        <tr className="bg-white  hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Samuel 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap hover:bg-gray-600 hover:text-white">
-                                Random questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Good
-                            </td>
-                            <td className="px-6 py-4">
-                                74%
-                            </td>
-                            
-                        </tr>
-                        <tr className="bg-white  hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Joseph
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap hover:bg-gray-600 hover:text-white">
-                                Random questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Good
-                            </td>
-                            <td className="px-6 py-4">
-                                65%
-                            </td>
-                            
-                        </tr>
-                        <tr className="bg-white  hover:bg-gray-600 hover:text-white">
-                            <th scope="row" className="px-6 py-4 font-medium hover:bg-gray-600 hover:text-white">
-                                Khalid 
-                            </th>
-                            <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap hover:bg-gray-600 hover:text-white">
-                                Random questions
-                            </th>
-                            <td className="px-6 py-4">
-                                25/08/2030
-                            </td>
-                            <td className="px-6 py-4">
-                                Good
-                            </td>
-                            <td className="px-6 py-4">
-                                59%
-                            </td>
-                            
-                        </tr>
+                    {category  ?  category.map( ( user , index ) => {
+                        return <QuizCategoryItem key ={index} email = {user['email']} username={user['username']} track={user['track']}  />
+                    }) : <h1>Loading.....</h1>}
+                       
                     </tbody>
                 </table>
             </div>
